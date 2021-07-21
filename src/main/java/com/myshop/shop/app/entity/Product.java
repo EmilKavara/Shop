@@ -121,6 +121,8 @@ public class Product implements Serializable {
         this.imageName = imageName;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -30,6 +30,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "orders")
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
+    @NamedQuery(name = "Orders.findLast", query = "SELECT o.orderId FROM Orders o ORDER BY o.orderId DESC"),
     @NamedQuery(name = "Orders.findByOrderId", query = "SELECT o FROM Orders o WHERE o.orderId = :orderId"),
     @NamedQuery(name = "Orders.findByOrderNumber", query = "SELECT o FROM Orders o WHERE o.orderNumber = :orderNumber"),
     @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),

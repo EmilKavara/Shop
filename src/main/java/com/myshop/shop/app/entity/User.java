@@ -20,22 +20,27 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author kavar
+ * @author kavara
  */
 @Entity
 @Table(name = "user")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"), 
+    @NamedQuery(name = "User.findAmount", query = "SELECT u.amount FROM User u WHERE u.userId=:userId"), 
     @NamedQuery(name = "User.findByUsernamePassword", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"),
+    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByMobileNumber", query = "SELECT u FROM User u WHERE u.mobileNumber = :mobileNumber"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPrivilege", query = "SELECT u FROM User u WHERE u.privilege = :privilege")})
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u.password FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "User.findByUsername2", query = "SELECT u FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "User.findByPrivilege", query = "SELECT u FROM User u WHERE u.privilege = :privilege"),
+    @NamedQuery(name = "User.findByAmount", query = "SELECT u FROM User u WHERE u.amount = :amount")})
+
+
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +64,7 @@ public class User implements Serializable {
     @Size(max = 30)
     @Column(name = "email")
     private String email;
-    @Size(max = 20)
+    @Size(max = 77)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
@@ -75,6 +80,8 @@ public class User implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "privilege")
     private String privilege;
+    @Column(name = "amount")
+    private Integer amount;
 
     public User() {
     }
@@ -160,6 +167,14 @@ public class User implements Serializable {
 
     public void setPrivilege(String privilege) {
         this.privilege = privilege;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     @Override

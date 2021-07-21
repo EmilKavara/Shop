@@ -14,4 +14,5 @@ import javax.ejb.Local;
 @Local
 public interface RegisterBeanLocal {
     public boolean register(String username,String firstName,String lastName,String password,String address,String phoneNum,String email);
+    public String hashPassword(String plainTextPassword);    
 }

@@ -82,14 +82,30 @@ body {
   color: white;
 }
 
-.labelE{
-    color:white;
-    
-    
+.div1{
+   
 }
-.buttonE{
+
+.image{
+    margin-top: 10%;
+    margin-left: 36%; 
+    width:350px;
+    height:350px;
+}
+.label1{
     color: white;
-  
+    font-size: 50px;
+    padding-left: 10px;
 }
+.p1{
+    margin: 10px;
+    display:block;
+    margin-left:38%;
+    color:white;
+    font-size: 45px;
+}
+
+
+            
 
 

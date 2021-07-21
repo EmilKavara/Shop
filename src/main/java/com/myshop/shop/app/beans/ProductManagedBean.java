@@ -34,6 +34,17 @@ public class ProductManagedBean implements Serializable{
       _productList3=productFacadeLocal.findTV();
         
     }
+    
+    public String delete(int productId) {
+        productFacadeLocal.delete(productId);
+        _productList.remove(productId-1);
+        return "admin.xhtml";
+    }
+    
+    public String save(String name,int quantity,double price) {
+        productFacadeLocal.save(name,quantity,price);        
+            return "admin";
+    }
 
     public List<Product> getProductList2() {
         return _productList2;
@@ -61,4 +72,6 @@ public class ProductManagedBean implements Serializable{
     public void setProductList(List<Product> _productList) {
         this._productList = _productList;
     }
+    
+    
 }

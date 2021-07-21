@@ -52,4 +52,28 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
             return products;
     }
     
+    @Override
+    public void delete(int productId) {
+        Query query=entityManager.createNamedQuery("Product.findByProductId").setParameter("productId", productId);
+        Product product=(Product)query.getSingleResult();
+        if (entityManager.contains(product)) {
+            entityManager.remove(product);
+        } else {
+            Product product2 = entityManager.find(Product.class, product.getProductId());
+            if (product2 != null) {
+                entityManager.remove(product2);
+            }
+        }
+    }
+    @Override
+    public void save(String name,int quantity,double price) {
+           Product product=new Product();
+           product.setDescription("");
+           product.setName(name);
+           product.setImageName(name);
+           product.setPrice(price);
+           product.setQuantity(quantity);
+           entityManager.persist(product);
+    
+}
 }

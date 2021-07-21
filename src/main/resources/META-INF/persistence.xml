@@ -5,10 +5,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/myData</jta-data-source>
     <class>com.myshop.shop.app.entity.Product</class>
-    <class>com.myshop.shop.app.entity.User</class>
     <class>com.myshop.shop.app.entity.Orders</class>
     <class>com.myshop.shop.app.entity.Shippers</class>
     <class>com.myshop.shop.app.entity.Payment</class>
     <class>com.myshop.shop.app.entity.OrderInfo</class>
+    <class>com.myshop.shop.app.entity.User</class>
   </persistence-unit>
 </persistence>

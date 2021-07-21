@@ -37,6 +37,7 @@ public class RegisterManagedBean implements Serializable{
     }
     
      public String register() {
+         
         boolean userCreated = registerBeanLocal.register(username, firstName, lastName,password,address,phoneNum,email);
         if (userCreated) {
             return "index";

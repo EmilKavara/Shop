@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+		<f:event listener="#{loginManagedBean.isLoggedIn()}" type="preRenderView"></f:event>
+	</f:metadata>
+    <h:head>
+        <title>Admin</title>
+    </h:head>
+    <h:body>
+       <div class="card">
+    <h:form id="form">
+        <p:growl id="msgs" showDetail="true"/>
+
+        <p:dataTable id="usersList" widgetVar="usersList" var="user" value="#{dtAddRowView.usersList}"
+                     editable="true">
+            <f:facet name="header">
+                Users
+            </f:facet>
+
+            <p:ajax event="rowEdit" listener="#{dtAddRowView.onRowEdit2}" update=":form:msgs"/>
+            <p:ajax event="rowEditCancel" listener="#{dtAddRowView.onRowCancel2}" update=":form:msgs"/>
+
+            <p:column headerText="Id">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.userId}"/></f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{user.userId}"
+                                                       style="width:100%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="First name">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.firstName}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.firstName}" style="width:100%"
+                                                       label="First Name"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Last name">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.lastName}"/></f:facet>                   
+                       <f:facet name="input"><p:inputText value="#{user.lastName}" style="width:100%"
+                                                       label="Last name"/></f:facet>                   
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Address">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.address}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.address}" style="width:100%"
+                                                       label="Address"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            
+            <p:column headerText="Username">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{user.username}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.username}" style="width:100%"
+                                                       label="Username"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+
+            <p:column style="width:6rem">
+                <p:rowEditor/>
+            </p:column>
+            <p:column>
+           <p:commandButton update="usersList" value="Delete" icon="ui-icon-closethick"
+                            action="#{userManagedBean.delete(user.userId)}"
+                        styleClass="ui-priority-primary">
+           </p:commandButton>
+        </p:column>
+            <p:column>
+           <p:commandButton value="Save" icon="ui-icon-closethick"
+                            action="#{userManagedBean.save(user.firstName,user.lastName,user.username)}"
+                        styleClass="ui-priority-primary">
+           </p:commandButton>
+        </p:column>
+        </p:dataTable>
+
+        <div class="p-grid p-mt-3">
+            <div class="p-col-12">
+                <p:commandButton value="Add new row" process="@this" update=":form:msgs"
+                                 action="#{dtAddRowView.onAddNew2()}" oncomplete="PF('usersList').addRow();" style="margin-top: 8px"/>
+                <p:button outcome="admin" value="Products" style="margin-left: 8px; margin-top: 8px"/>
+            </div>
+        </div>
+        
+             
+    </h:form>
+</div>
+        
+        
+    </h:body>
+</html>
+

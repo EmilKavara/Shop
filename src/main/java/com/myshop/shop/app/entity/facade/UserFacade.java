@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,7 +36,34 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         throw new UnsupportedOperationException("Not supported yet."); 
     }
      
- 
+ @Override
+    public void delete(int userId) {
+        Query query=entityManager.createNamedQuery("User.findByUserId").setParameter("userId", userId);
+        User user=(User)query.getSingleResult();
+        if (entityManager.contains(user)) {
+            entityManager.remove(user);
+        } else {
+            User user2 = entityManager.find(User.class, user.getUserId());
+            if (user2 != null) {
+                entityManager.remove(user2);
+            }
+        }
+    }
+    @Override
+    public void save(String name,String lastName,String username) {
+           User user=new User();
+           user.setFirstName(name);
+           user.setLastName(lastName);
+           user.setAddress("address");
+           user.setUsername(username);
+           user.setPassword("password");
+           user.setMobileNumber("223");
+           user.setPrivilege("User");
+           user.setAmount(200);
+           user.setEmail("email");
+           entityManager.persist(user);
+    
+}
        
             
     }

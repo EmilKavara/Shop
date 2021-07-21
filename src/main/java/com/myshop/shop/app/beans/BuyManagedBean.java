@@ -5,10 +5,12 @@
  */
 package com.myshop.shop.app.beans;
 
+import com.myshop.shop.app.entity.Item;
 import com.myshop.shop.app.entity.facade.BuyBeanLocal;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.context.FacesContext;
@@ -30,6 +32,16 @@ public class BuyManagedBean implements Serializable{
     private BuyBeanLocal buyBeanLocal;
     
     private String shipper;
+    String shipperName;
+    private List<Item> products;
+
+    public List<Item> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Item> products) {
+        this.products = products;
+    }
     
     public BuyManagedBean(){
         
@@ -44,9 +56,19 @@ public class BuyManagedBean implements Serializable{
     }
     
     
+    public String purchase(List<Item> products,int quantity){
+        int shipperId=Integer.parseInt(shipper);
+        boolean orderInfo=buyBeanLocal.purchase(products,quantity,shipperId);
+        if(orderInfo){
+            return "index";
+        }else{
+            return "error";
+        }
+    }
+    
      public String purchase() {
          int shipperId;
-         //shipper="2";
+         
         switch (shipper) {
             case "1":
                 shipperId=1;
@@ -59,9 +81,9 @@ public class BuyManagedBean implements Serializable{
                 break;
         }
           Date shipperDate=shipperDate(shipperId);
-        boolean userCreated = buyBeanLocal.purchase(shipperDate);
+        boolean userCreated = buyBeanLocal.afterPurchase(shipperDate);
         if (userCreated) {
-            return "index";
+            return "";
         } else {
             return "cart";
         }

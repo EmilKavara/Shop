@@ -8,10 +8,9 @@
     <h:body>
         
         <div class="navbar">
-  <a href="/Shop">Home</a>
+  <a href="/Shop/faces/index.xhtml">Home</a>
   <div class="dropdown">
-    <button class="dropbtn">Categories 
-      
+    <button class="dropbtn">Categories      
     </button>
     <div class="dropdown-content">
       <a href="/Shop/faces/laptops.xhtml">Laptops</a>
@@ -53,7 +52,7 @@
             <h:inputSecret value="#{registerManagedBean.password}" maxlength="15" size="15"   
              required="true" requiredMessage="Password is required"></h:inputSecret> 
             </h:panelGroup>
-            <h:commandButton value="Register" action="#{registerManagedBean.register()}"/>
+            <h:commandButton value="Register" action="#{registerManagedBean.register()}" class="regButton"/>
         </h:form>
     
     </h:body>

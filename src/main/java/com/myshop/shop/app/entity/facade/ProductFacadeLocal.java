@@ -31,6 +31,8 @@ public interface ProductFacadeLocal {
     
     List<Product> findTV();
     
-
+    void delete(int productId);
+    
+    void save(String name,int quantity,double price);
     
 }

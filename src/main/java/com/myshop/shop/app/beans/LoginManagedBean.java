@@ -9,6 +9,7 @@ import com.myshop.shop.app.entity.User;
 import com.myshop.shop.app.entity.facade.LoginBeanLocal;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,12 +39,39 @@ public class LoginManagedBean implements Serializable{
                    FacesContext facesContext = FacesContext.getCurrentInstance();
                    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
                    session.setAttribute("loggedIn",true);
-                   return "laptops";
+                   String privilege=user.getPrivilege();
+                   session.setAttribute("privilege",privilege);
+                   int userId=user.getUserId();
+                   session.setAttribute("userId", userId);
+                   session.setAttribute("user",user);
+                   if(user.getPrivilege().equals("User")){
+                       return "laptops";
+                   }else{
+                       return "admin";
+                   }
         }else{
             
             return "login";
         }
     }
+    
+    public void isLoggedIn() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		
+		Object loggedIn = session.getAttribute("loggedIn");
+                Object privilege=session.getAttribute("privilege");
+		if(loggedIn == null || privilege.equals("User")) {
+			ConfigurableNavigationHandler nav
+			   = (ConfigurableNavigationHandler)
+					   facesContext.getApplication().getNavigationHandler();
+ 
+			nav.performNavigation("index");
+                        //return "Login";
+		} else {
+			
+		}
+	}
 
     public String getUsername() {
         return username;

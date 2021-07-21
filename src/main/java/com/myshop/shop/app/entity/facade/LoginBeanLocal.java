@@ -13,4 +13,5 @@ import com.myshop.shop.app.entity.User;
  */
 public interface LoginBeanLocal {
     public User validateUsernamePassword(String username,String password);
+    public boolean checkPass(String password,String dbPassword);
 }

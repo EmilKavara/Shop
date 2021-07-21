@@ -43,6 +43,15 @@ public class UserManagedBean implements Serializable{
         this._userList = _userList;
     }
     
-      
+      public String delete(int userId) {
+        userFacadeLocal.delete((userId));
+        _userList.remove(userId-1);
+        return "adminUsers.xhtml";
+    }
+    
+    public String save(String name,String lastName,String username) {
+        userFacadeLocal.save(name,lastName,username);        
+            return "adminUsers";
+    }
     
 }

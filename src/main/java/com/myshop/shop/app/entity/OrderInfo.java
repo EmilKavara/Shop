@@ -36,7 +36,7 @@ public class OrderInfo implements Serializable {
     @EmbeddedId
     protected OrderInfoPK orderInfoPK;
     @Column(name = "price")
-    private Integer price;
+    private Double price;
     @Column(name = "quantity")
     private Integer quantity;
     @Column(name = "discount")
@@ -67,11 +67,11 @@ public class OrderInfo implements Serializable {
         this.orderInfoPK = orderInfoPK;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

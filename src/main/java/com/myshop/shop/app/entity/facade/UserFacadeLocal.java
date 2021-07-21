@@ -24,5 +24,9 @@ public interface UserFacadeLocal {
     List<User> findAll();
 
     List<User> findRange(int[] range);
+    
+    void delete(int productId);
+    
+    void save(String name,String lastName,String username);
 
 }

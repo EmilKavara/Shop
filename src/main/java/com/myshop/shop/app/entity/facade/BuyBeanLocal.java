@@ -8,7 +8,9 @@ package com.myshop.shop.app.entity.facade;
 
 
 
+import com.myshop.shop.app.entity.Item;
 import java.sql.Date;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -17,6 +19,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface BuyBeanLocal {
-    public boolean purchase(Date shipperDate);
-    public boolean afterPurchase(Integer orderId,Integer productId,Integer price,Integer quantity,Integer discount,String note,Integer shipperId);
+    public boolean afterPurchase(Date shipperDate);
+    public boolean purchase(List<Item> prodcut,int quantity,int shipperId);
 }

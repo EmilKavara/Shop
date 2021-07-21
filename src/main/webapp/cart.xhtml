@@ -17,7 +17,6 @@
   <a href="/Shop/faces/index.xhtml">Home</a>
   <div class="dropdown">
     <button class="dropbtn">Categories 
-      <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
       <a href="/Shop/faces/laptops.xhtml">Laptops</a>
@@ -33,6 +32,7 @@
 	<h:form prependId="false" class="table">
 		<table border="1" cellpadding="2" cellspacing="2">
 			<tr>
+                            <th></th>
 				<th>Remove</th>
 				<th>Id</th>
 				<th>Name</th>
@@ -41,9 +41,18 @@
 				<th>Sub Total</th>
 			</tr>
 			<ui:repeat var="item" value="#{cartManagedBean.items}">
-				<tr>
+                           
+                                
+                            
+                              
+                            <tr>
+                                <td align="center">
+                                                    <h:commandButton value="Buy" action="#{buyManagedBean.purchase(cartManagedBean.items,item.quantity)}"/>
+                                                </td>
 					<td align="center">
 						<h:commandLink value="X" action="#{cartManagedBean.delete(item.product)}"></h:commandLink>
+                                                
+                                                
 					</td>
 					<td>#{item.product.productId}</td>
 					<td>#{item.product.name}</td>
@@ -63,14 +72,12 @@
             <f:selectItem itemValue = "3" itemLabel = "Standard shipment(7 days)" />
             </h:selectOneRadio>
              <h:commandButton value="Confirm shipment" 
-    	      action="#{buyManagedBean.checkRadio()}"/>
+    	      action="#{buyManagedBean.purchase()}"/>
 		<br></br>
 		<h:commandLink value="Continue Shopping" action="index?faces-redirect=true"></h:commandLink>
 	</h:form>
         
-        <h:form class="buyForm">
-            <h:commandButton value="Buy" action="#{buyManagedBean.purchase()}"/>
-        </h:form>
+        
         
         
         
